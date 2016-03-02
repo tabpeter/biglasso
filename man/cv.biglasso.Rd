@@ -1,0 +1,100 @@
+\name{cv.biglasso}
+
+\alias{cv.biglasso}
+
+\title{Cross-validation for biglasso}
+
+\description{
+Perform k-fold cross validation for penalized regression models over a grid of 
+values for the regularization parameter lambda.}
+
+\usage{
+cv.biglasso(X, y, row.idx = 1:nrow(X), ..., ncores = 1, 
+            nfolds=10, seed, cv.ind, trace=FALSE)
+}
+
+\arguments{
+  \item{X}{The design matrix, without an intercept, as in \code{\link{biglasso}}.}
+  \item{y}{The response vector, as in \code{biglasso}.}
+  \item{row.idx}{The integer vector of row indices of \code{X} that used for fitting 
+  the model. as in \code{biglasso}.}
+  \item{...}{Additional arguments to \code{biglasso}.}
+  \item{ncores}{\code{cv.biglasso} can be run in parallel across a
+    cluster using the \code{parallel} package. If \code{ncores > 1}, then a cluster is 
+    created to run \code{cv.biglasso} in parallel. The code is run in series if 
+    \code{ncores = 1} (the default). An error occurs if \code{ncores} is larger than the
+    total number of available cores. Since each core takes (around equally) a large portion 
+    of memory, the total memory consumed would be proportional to \code{ncores}.
+    \strong{Be cautious here to prevent the memory usage from blowing up in the big data case.}
+    }
+  \item{nfolds}{The number of cross-validation folds.  Default is 10.}
+  \item{seed}{The seed of the random number generator in order to obtain 
+  reproducible results.}
+  \item{cv.ind}{Which fold each observation belongs to.  By default the
+    observations are randomly assigned by \code{cv.biglasso}.}
+  \item{trace}{If set to TRUE, cv.biglasso will inform the user of its
+    progress by announcing the beginning of each CV fold.  Default is
+    FALSE.}
+  }
+
+\details{
+  
+  The function calls \code{biglasso} \code{nfolds} times, each time
+  leaving out 1/\code{nfolds} of the data.  The cross-validation
+  error is based on the residual sum of squares when
+  \code{family="gaussian"} and the binomial deviance when
+  \code{family="binomial"}.\cr
+  \cr
+  The S3 class object \code{cv.biglasso} inherits class \code{\link[ncvreg]{cv.ncvreg}}.
+  So S3 functions such as \code{"summary", "plot"} can be directly applied to the
+ \code{cv.biglasso} object.
+}
+
+\value{
+  An object with S3 class \code{"cv.biglasso"} which inherits from class \code{"cv.ncvreg"}.
+  The following variables are contained in the class (adopted from \code{\link[ncvreg]{cv.ncvreg}}).
+  \item{cve}{The error for each value of \code{lambda}, averaged
+    across the cross-validation folds.}
+  \item{cvse}{The estimated standard error associated with each value of
+    for \code{cve}.}
+  \item{lambda}{The sequence of regularization parameter values along
+    which the cross-validation error was calculated.}
+  \item{fit}{The fitted \code{biglasso} object for the whole data.}
+  \item{min}{The index of \code{lambda} corresponding to
+    \code{lambda.min}.}
+  \item{lambda.min}{The value of \code{lambda} with the minimum
+    cross-validation error.}
+  \item{null.dev}{The deviance for the intercept-only model.}
+  \item{pe}{If \code{family="binomial"}, the cross-validation prediction
+    error for each value of \code{lambda}.}
+}
+
+\author{
+  Yaohui Zeng and Patrick Breheny
+  
+  Maintainer: Yaohui Zeng <yaohui-zeng@uiowa.edu>
+}
+
+\seealso{\code{\link{biglasso}}, \code{\link{plot.cv.biglasso}}, \code{\link{summary.cv.biglasso}}, \code{\link{setupX}}}
+
+\examples{
+## cv.biglasso
+seed <- 1234
+data(prostate)
+X <- as.matrix(prostate[,1:8])
+y <- prostate$lpsa
+X <- as.big.matrix(X)
+# run in series
+cvfit <- cv.biglasso(X, y, family = 'gaussian', seed = seed)
+par(mfrow = c(2, 2))
+plot(cvfit, type = 'all')
+summary(cvfit)
+
+# run in parallel
+\dontrun{
+cvfit2 <- cv.biglasso(X, y, family = 'gaussian', seed = seed, ncores = 5)
+plot(cvfit2)
+summary(cvfit2)
+stopifnot(identical(cvfit, cvfit2))
+}
+}

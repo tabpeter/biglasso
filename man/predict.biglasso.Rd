@@ -1,0 +1,65 @@
+\name{predict.biglasso}
+\alias{predict.biglasso}
+\alias{coef.biglasso}
+
+\title{Model predictions based on a fitted "biglasso" object.}
+
+\description{
+Extract predictions (fitted reponse, coefficients, etc.) from a fitted \code{\link{biglasso}} object.
+}
+
+\usage{
+\method{predict}{biglasso}(object, X, row.idx = 1:nrow(X), 
+        type = c("link", "response", "class", "coefficients", "vars", "nvars"),
+        lambda, which = 1:length(object$lambda), ...)
+
+\method{coef}{biglasso}(object, lambda, which = 1:length(object$lambda), drop = TRUE, ...)
+}
+
+\arguments{
+  \item{object}{A fitted \code{"biglasso"} model object.}
+  \item{X}{Matrix of values at which predictions are to be made. It must be a 
+  \code{\link[bigmemory]{big.matrix}} object. Not used for \code{type="coefficients"}.}
+  \item{row.idx}{Similar to that in \code{\link[biglasso]{biglasso}}, it's a 
+  vector of the row indices of \code{X} that used for the prediction. \code{1:nrow(X)} by default.}
+  \item{type}{Type of prediction: \code{"link"} returns the linear predictors; 
+  \code{"response"} gives the fitted values; \code{"class"} returns the binomial 
+  outcome with the highest probability; \code{"coefficients"} returns the coefficients;
+  \code{"vars"} returns a list containing the indices and names of the nonzero variables at each value of \code{lambda}; \code{"nvars"} returns the number of nonzero coefficients at each value of \code{lambda}.}
+  \item{lambda}{Values of the regularization parameter \code{lambda} at
+    which predictions are requested.  Linear interpolation is used for values 
+    of \code{lambda} not in the sequence of lambda values in the fitted models.}
+  \item{which}{Indices of the penalty parameter \code{lambda} at which
+    predictions are required.  By default, all indices are returned.  If
+    \code{lambda} is specified, this will override \code{which}.}
+  \item{drop}{If coefficients for a single value of \code{lambda} are to
+    be returned, reduce dimensions to a vector?  Setting
+    \code{drop=FALSE} returns a 1-column matrix.}
+  \item{\dots}{Not used.}
+}
+
+\value{The object returned depends on \code{type}.}
+
+\author{
+  Yaohui Zeng and Patrick Breheny
+  
+  Maintainer: Yaohui Zeng <yaohui-zeng@uiowa.edu>
+}
+
+\seealso{\code{\link{biglasso}}, \code{\link{cv.biglasso}}}
+\examples{
+## Logistic regression
+data(heart)
+X <- as.matrix(heart[,1:9])
+y <- heart$chd
+X <- as.big.matrix(X)
+fit <- biglasso(X, y, penalty = 'lasso', family = "binomial")
+coef(fit, lambda=0.05, drop = FALSE)
+predict(fit, X, type="link", lambda=0.05)
+predict(fit, X, type="response", lambda=0.05)
+predict(fit, X, type="class", lambda=0.1)
+predict(fit, type="vars", lambda=c(0.05, 0.1))
+predict(fit, type="nvars", lambda=c(0.05, 0.1))
+}
+\keyword{models}
+\keyword{regression}

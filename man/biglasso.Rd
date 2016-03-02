@@ -1,0 +1,127 @@
+\name{biglasso}
+
+\alias{biglasso}
+
+\title{Fit lasso penalized regression path for big data}
+
+\description{
+Extend lasso model fitting to big data that cannot be loaded into memory. Fit 
+solution paths for linear or logistic regression models penalized by lasso, 
+or ridge, or elastic-net over a grid of values for the regularization parameter lambda.
+}
+
+\usage{
+biglasso(X, y, row.idx = 1:nrow(X), penalty = c("lasso", "ridge", "enet"),
+        family = c("gaussian","binomial"),
+        alpha = 1, lambda.min = ifelse(nrow(X) > ncol(X),.001,.05), nlambda = 100,
+        lambda, eps = .001, max.iter = 1000, dfmax = ncol(X)+1, 
+        penalty.factor = rep(1, ncol(X)), warn = TRUE)
+}
+
+\arguments{
+  \item{X}{The design matrix, without an intercept. It must be a \code{\link[bigmemory]{big.matrix}} object. The function standardizes the data and includes an intercept internally 
+  by default during the model fitting.}
+  \item{y}{The response vector.}
+  \item{row.idx}{The integer vector of row indices of \code{X} that used for fitting 
+  the model. \code{1:nrow(X)} by default.}
+  \item{penalty}{The penalty to be applied to the model. Either "lasso" (the default), 
+  "ridge", or "enet" (elastic net).}
+  \item{family}{Either "gaussian", "binomial", depending on the response.}
+  \item{alpha}{The elastic-net mixing parameter that controls the relative contribution from the lasso (l1) and the ridge (l2) penalty. It must be a number between 0 and 1 if \code{"penalty"} is "enet". No need to set \code{"alpha"} value for other two penalties.}
+  \item{lambda.min}{The smallest value for lambda, as a fraction of
+    lambda.max.  Default is .001 if the number of observations is larger
+    than the number of covariates and .05 otherwise.}
+  \item{nlambda}{The number of lambda values.  Default is 100.}
+  \item{lambda}{A user-specified sequence of lambda values.  By default,
+    a sequence of values of length \code{nlambda} is computed, equally
+    spaced on the log scale.}
+  \item{eps}{Convergence threshhold.  The algorithm iterates until the
+    relative change in any coefficient is less than \code{eps}.  Default
+    is \code{.001}.}
+  \item{max.iter}{Maximum number of iterations.  Default is 1000.}
+  \item{dfmax}{Upper bound for the number of nonzero coefficients.
+    Default is no upper bound.  However, for large data sets,
+    computational burden may be heavy for models with a large number of
+    nonzero coefficients.}
+  \item{penalty.factor}{A multiplicative factor for the penalty applied
+    to each coefficient.  If supplied, \code{penalty.factor} must be a
+    numeric vector of length equal to the number of columns of
+    \code{X}.  The purpose of \code{penalty.factor} is to apply
+    differential penalization if some coefficients are thought to be
+    more likely than others to be in the model. Current package doesn't allow
+    unpenalized coefficients. That is\code{penalty.factor} cannot be 0. }
+  \item{warn}{Return warning messages for failures to converge and model
+    saturation?  Default is TRUE.}
+}
+
+\details{
+  See documentation in \code{\link[ncvreg]{ncvreg}} (or package \href{http://cran.r-project.org/package=ncvreg}{ncvreg}) for more details about the model
+  and the algorithm. (Note the nonconvex penalties MCP and SCAD in \code{ncvreg} package are not supported in this package.)
+  }
+ 
+\value{
+  An object with S3 class \code{"biglasso"} with following variables.
+  \item{beta}{The fitted matrix of coefficients, store in sparse matrix representation.
+  The number of rows is equal to the number of coefficients, and the number of columns is
+    equal to \code{nlambda}.}
+  \item{iter}{A vector of length \code{nlambda} containing the number
+    of iterations until convergence at each value of \code{lambda}.}
+  \item{lambda}{The sequence of regularization parameter values in the path.}
+  \item{penalty}{Same as above.}
+  \item{family}{Same as above.}
+  \item{alpha}{Same as above.}
+  \item{loss}{A vector containing either the residual sum of squares
+    (\code{"gaussian"}) or negative log-likelihood (\code{"binomial"}) of the 
+    fitted model at each value of \code{lambda}.}
+  \item{penalty.factor}{Same as above.}
+  \item{n}{The number of observations used in the model fitting. It's equal to \code{length(row.idx)}.}
+  \item{center}{The sample mean vector of the variables, i.e., column mean of the submatrix of \code{X} used for model fitting.}
+  \item{scale}{The sample standard deviation of the variables, i.e., column standard deviation of the submatrix of \code{X} used for model fitting.}
+  \item{y}{The response vector used in the model fitting. Depending on \code{row.idx}, it 
+  could be a subset of the raw input of the response vector y.}
+}
+
+\author{
+  Yaohui Zeng and Patrick Breheny
+  
+  Maintainer: Yaohui Zeng <yaohui-zeng@uiowa.edu>
+}
+
+\seealso{\code{\link{biglasso-package}}, \code{\link{setupX}}, \code{\link{cv.biglasso}}, \code{\link{plot.biglasso}}, \code{\link[ncvreg]{ncvreg}}}
+\examples{
+## See "biglasso-package" for the comprehensive example of reading data from 
+## external big data file, fit lasso model, run cross validation in parallel, etc.
+
+## Below are rather simple examples.
+## Linear regression
+data(prostate)
+X <- as.matrix(prostate[,1:8])
+y <- prostate$lpsa
+X <- as.big.matrix(X)
+# lasso, default
+par(mfrow=c(1,3))
+fit.lasso <- biglasso(X, y, family = 'gaussian')
+plot(fit.lasso, log.l = TRUE, main = 'lasso')
+# ridge
+fit.ridge <- biglasso(X, y, penalty  = 'ridge', family = 'gaussian')
+plot(fit.ridge, log.l = TRUE, main = 'ridge')
+# elastic net
+fit.enet <- biglasso(X, y, penalty = 'enet', alpha = 0.5, family = 'gaussian')
+plot(fit.enet, log.l = TRUE, main = 'elastic net, alpha = 0.5')
+
+## Logistic regression
+data(heart)
+X <- as.matrix(heart[,1:9])
+y <- heart$chd
+X <- as.big.matrix(X)
+# lasso, default
+par(mfrow = c(1, 3))
+fit.bin.lasso <- biglasso(X, y, penalty = 'lasso', family = "binomial")
+plot(fit.bin.lasso, log.l = TRUE, main = 'lasso')
+# ridge
+fit.bin.ridge <- biglasso(X, y, penalty = 'ridge', family = "binomial")
+plot(fit.bin.ridge, log.l = TRUE, main = 'ridge')
+# elastic net
+fit.bin.enet <- biglasso(X, y, penalty = 'enet', alpha = 0.5, family = "binomial")
+plot(fit.bin.enet, log.l = TRUE, main = 'elastic net, alpha = 0.5')
+}

@@ -1,0 +1,46 @@
+\name{setupX}
+
+\alias{setupX}
+
+\title{Set up design matrix X by reading data from big data file}
+
+\description{
+Set up the design matrix X as a \code{big.matrix} object based on external massive data file stored on disk that cannot be fullly loaded into memory. The data file must be a well-formated ASCII-file, and contains only one single type. Current version only supports \code{double} type. Other restrictions about the data file are described in \code{\link{biglasso-package}}. This function reads the massive data, and creates a \code{big.matrix} object. By default, the 
+resulting \code{big.matrix} is file-backed, and can be shared across processors or nodes of a cluster.}
+
+\usage{
+setupX(filename, dir = getwd(), sep = ",", 
+       backingfile = paste0(unlist(strsplit(filename, split = "\\\."))[1], ".bin"),
+       descriptorfile = paste0(unlist(strsplit(filename, split = "\\\."))[1], ".desc"), 
+       ...)
+}
+
+\arguments{
+  \item{filename}{The name of the data file. For example, "dat.txt".} 
+  \item{dir}{The directory used to store the binary and descriptor files associated 
+  with the \code{big.matrix}. The default is current working directory.}
+  \item{sep}{The field separator character. For example, "," for comma-delimited files 
+  (the default); "\\t" for tab-delimited files.}
+  \item{backingfile}{The binary file associated with the file-backed \code{big.matrix}. By default, its name is the same as \code{filename} with the extension replaced by ".bin".}
+  \item{descriptorfile}{The descriptor file used for the description of the file-backed \code{big.matrix}. By default, its name is the same as \code{filename} with the extension replaced by ".desc".}
+  \item{...}{Additional arguments that can be passed into function \code{\link[bigmemory]{read.big.matrix}}.}
+}
+
+\details{
+  This function is a simple wrapper of \code{\link[bigmemory]{read.big.matrix}}. See \code{\link[bigmemory]{read.big.matrix}} and the package \href{http://cran.r-project.org/package=bigmemory}{bigmemory} for more details. 
+  }
+ 
+\value{
+  A \code{big.matrix} object corresponding to a file-backed \code{big.matrix}. It's ready  to be used as the design matrix \code{X} in \code{\link{biglasso}} and \code{\link{cv.biglasso}}.
+}
+
+\author{
+  Yaohui Zeng and Patrick Breheny
+  
+  Maintainer: Yaohui Zeng <yaohui-zeng@uiowa.edu>
+}
+
+\seealso{\code{\link{biglasso}}, \code{\link{cv.ncvreg}}}
+\examples{
+## see the example in "biglasso-package"
+}
