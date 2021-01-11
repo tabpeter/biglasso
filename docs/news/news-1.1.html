@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plots the cross-validation curve from a "cv.biglasso" object — plot.cv.biglasso • biglasso</title>
+<title>Version 1.1 • biglasso</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,7 @@
 
 
 
-<meta property="og:title" content="Plots the cross-validation curve from a "cv.biglasso" object — plot.cv.biglasso" />
-<meta property="og:description" content="Plot the cross-validation curve from a cv.biglasso object,
-along with standard error bars." />
+<meta property="og:title" content="Version 1.1" />
 
 
 
@@ -60,7 +58,7 @@ along with standard error bars." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -115,93 +113,38 @@ along with standard error bars." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plots the cross-validation curve from a "cv.biglasso" object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/YaohuiZeng/biglasso/blob/master/R/plot.cv.biglasso.R'><code>R/plot.cv.biglasso.R</code></a></small>
-    <div class="hidden name"><code>plot.cv.biglasso.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small>1.1</small></h1>
+      
     </div>
 
-    <div class="ref-description">
-    <p>Plot the cross-validation curve from a <code><a href='cv.biglasso.html'>cv.biglasso</a></code> object,
-along with standard error bars.</p>
-    </div>
-
-    <pre class="usage"><span class='co'># S3 method for cv.biglasso</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
-  <span class='va'>x</span>,
-  log.l <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cve"</span>, <span class='st'>"rsq"</span>, <span class='st'>"scale"</span>, <span class='st'>"snr"</span>, <span class='st'>"pred"</span>, <span class='st'>"all"</span><span class='op'>)</span>,
-  selected <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  vertical.line <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  col <span class='op'>=</span> <span class='st'>"red"</span>,
-  <span class='va'>...</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>A <code>"cv.biglasso"</code> object.</p></td>
-    </tr>
-    <tr>
-      <th>log.l</th>
-      <td><p>Should horizontal axis be on the log scale?  Default is TRUE.</p></td>
-    </tr>
-    <tr>
-      <th>type</th>
-      <td><p>What to plot on the vertical axis.  <code>cve</code> plots the
-cross-validation error (deviance); <code>rsq</code> plots an estimate of the
-fraction of the deviance explained by the model (R-squared); <code>snr</code>
-plots an estimate of the signal-to-noise ratio; <code>scale</code> plots, for
-<code>family="gaussian"</code>, an estimate of the scale parameter (standard
-deviation); <code>pred</code> plots, for <code>family="binomial"</code>, the estimated
-prediction error; <code>all</code> produces all of the above.</p></td>
-    </tr>
-    <tr>
-      <th>selected</th>
-      <td><p>If <code>TRUE</code> (the default), places an axis on top of the
-plot denoting the number of variables in the model (i.e., that have a
-nonzero regression coefficient) at that value of <code>lambda</code>.</p></td>
-    </tr>
-    <tr>
-      <th>vertical.line</th>
-      <td><p>If <code>TRUE</code> (the default), draws a vertical line at
-the value where cross-validaton error is minimized.</p></td>
-    </tr>
-    <tr>
-      <th>col</th>
-      <td><p>Controls the color of the dots (CV estimates).</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other graphical parameters to <code>plot</code></p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Error bars representing approximate 68% confidence intervals are plotted
-along with the estimates at value of <code>lambda</code>.  For <code>rsq</code> and
-<code>snr</code>, these confidence intervals are quite crude, especially near.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='biglasso.html'>biglasso</a></code>, <code><a href='cv.biglasso.html'>cv.biglasso</a></code></p></div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Yaohui Zeng and Patrick Breheny</p>
-<p>Maintainer: Yaohui Zeng &lt;yaohui.zeng@gmail.com&gt;</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## See examples in "cv.biglasso"</span>
-
-</div></pre>
+    <div id="biglasso-11-1" class="section level1">
+<h1 class="page-header" data-toc-text="1.1-1">
+<a href="#biglasso-11-1" class="anchor"></a>biglasso 1.1-1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Three sparse screening rules (SSR, EDPP, SSR-Dome) were implemented. Our new proposed HSR-Dome combines HSR and Dome test for feature screening, leading to even better performance as compared to ‘glmnet’.</li>
+<li>OpenMP parallel computing was added to speedup single model fitting.</li>
+<li>Both exact Newton and majorization-minimization (MM) algorithm for logistic regression were implemented. The latter could be faster, especially in data-larger-than-RAM cases.</li>
+<li>Source code were rewritten in pure cpp.</li>
+<li>Sparse matrix representation was added using Armadillo library.</li>
+</ul>
+</div>
+    <div id="biglasso-11-2" class="section level1">
+<h1 class="page-header" data-toc-text="1.1-2">
+<a href="#biglasso-11-2" class="anchor"></a>biglasso 1.1-2<small> Unreleased </small>
+</h1>
+<ul>
+<li>fixed bugs occurred when some features have identical values for different observations. These features are internally removed from model fitting.</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
