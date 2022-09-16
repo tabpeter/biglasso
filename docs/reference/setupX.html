@@ -25,7 +25,7 @@ nodes of a cluster."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">biglasso</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -72,45 +72,60 @@ nodes of a cluster.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">setupX</span><span class="op">(</span>
-  <span class="va">filename</span>,
-  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  sep <span class="op">=</span> <span class="st">","</span>,
-  backingfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">filename</span>, split <span class="op">=</span> <span class="st">"\\."</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">".bin"</span><span class="op">)</span>,
-  descriptorfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">filename</span>, split <span class="op">=</span> <span class="st">"\\."</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">".desc"</span><span class="op">)</span>,
-  type <span class="op">=</span> <span class="st">"double"</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">setupX</span><span class="op">(</span></span>
+<span>  <span class="va">filename</span>,</span>
+<span>  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  sep <span class="op">=</span> <span class="st">","</span>,</span>
+<span>  backingfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">filename</span>, split <span class="op">=</span> <span class="st">"\\."</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">".bin"</span><span class="op">)</span>,</span>
+<span>  descriptorfile <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="va">filename</span>, split <span class="op">=</span> <span class="st">"\\."</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="st">".desc"</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"double"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>filename</dt>
 <dd><p>The name of the data file. For example, "dat.txt".</p></dd>
+
+
 <dt>dir</dt>
 <dd><p>The directory used to store the binary and descriptor files
 associated with the <code>big.matrix</code>. The default is current working
 directory.</p></dd>
+
+
 <dt>sep</dt>
 <dd><p>The field separator character. For example, "," for
 comma-delimited files (the default); "\t" for tab-delimited files.</p></dd>
+
+
 <dt>backingfile</dt>
 <dd><p>The binary file associated with the file-backed
 <code>big.matrix</code>. By default, its name is the same as <code>filename</code> with
 the extension replaced by ".bin".</p></dd>
+
+
 <dt>descriptorfile</dt>
 <dd><p>The descriptor file used for the description of the
 file-backed <code>big.matrix</code>. By default, its name is the same as
 <code>filename</code> with the extension replaced by ".desc".</p></dd>
+
+
 <dt>type</dt>
 <dd><p>The data type. Only "double" is supported for now.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments that can be passed into function
 <code><a href="https://rdrr.io/pkg/bigmemory/man/write.big.matrix.html" class="external-link">read.big.matrix</a></code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>big.matrix</code> object corresponding to a file-backed
+    
+
+<p>A <code>big.matrix</code> object corresponding to a file-backed
 <code>big.matrix</code>. It's ready to be used as the design matrix <code>X</code> in
 <code><a href="biglasso.html">biglasso</a></code> and <code><a href="cv.biglasso.html">cv.biglasso</a></code>.</p>
     </div>
@@ -138,8 +153,8 @@ details.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## see the example in "biglasso-package"</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## see the example in "biglasso-package"</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -155,7 +170,7 @@ details.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

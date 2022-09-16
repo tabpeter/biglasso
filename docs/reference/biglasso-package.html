@@ -27,7 +27,7 @@ powerful big data analysis even with only an ordinary laptop."><!-- mathjax --><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">biglasso</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -175,43 +175,43 @@ Advances in Neural Information Processing Systems</em>, pp. 1053-1061.</p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## Example of reading data from external big data file, fit lasso model, </span></span>
-<span class="r-in"><span class="co">## and run cross validation in parallel</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># simulated design matrix, 1000 observations, 500,000 variables, ~ 5GB</span></span>
-<span class="r-in"><span class="co"># there are 10 true variables with non-zero coefficient 2.</span></span>
-<span class="r-in"><span class="va">xfname</span> <span class="op">&lt;-</span> <span class="st">'x_e3_5e5.txt'</span> </span>
-<span class="r-in"><span class="va">yfname</span> <span class="op">&lt;-</span> <span class="st">'y_e3_5e5.txt'</span> <span class="co"># response vector</span></span>
-<span class="r-in"><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="setupX.html">setupX</a></span><span class="op">(</span><span class="va">xfname</span>, sep <span class="op">=</span> <span class="st">'\t'</span><span class="op">)</span> <span class="co"># create backing files (.bin, .desc)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="co"># ~ 7 minutes; this is just one-time operation</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># the big.matrix then can be retrieved by its descriptor file (.desc) in any new R session. </span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">xdesc</span> <span class="op">&lt;-</span> <span class="st">'x_e3_5e5.desc'</span> </span>
-<span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">attach.big.matrix</span><span class="op">(</span><span class="va">xdesc</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">yfname</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">time.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="biglasso.html">biglasso</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">'gaussian'</span>, screen <span class="op">=</span> <span class="st">'Hybrid'</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">time.fit</span><span class="op">)</span> <span class="co"># ~ 44 seconds for fitting a lasso model along the entire solution path</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># cross validation in parallel</span></span>
-<span class="r-in"><span class="va">seed</span> <span class="op">&lt;-</span> <span class="fl">1234</span></span>
-<span class="r-in"><span class="va">time.cvfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">cvfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="cv.biglasso.html">cv.biglasso</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">'gaussian'</span>, screen <span class="op">=</span> <span class="st">'Hybrid'</span>, </span>
-<span class="r-in">                       seed <span class="op">=</span> <span class="va">seed</span>, ncores <span class="op">=</span> <span class="fl">4</span>, nfolds <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">time.cvfit</span><span class="op">)</span> <span class="co"># ~ 3 minutes for 10-fold cross validation</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cvfit</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cvfit</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## Example of reading data from external big data file, fit lasso model, </span></span></span>
+<span class="r-in"><span><span class="co">## and run cross validation in parallel</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># simulated design matrix, 1000 observations, 500,000 variables, ~ 5GB</span></span></span>
+<span class="r-in"><span><span class="co"># there are 10 true variables with non-zero coefficient 2.</span></span></span>
+<span class="r-in"><span><span class="va">xfname</span> <span class="op">&lt;-</span> <span class="st">'x_e3_5e5.txt'</span> </span></span>
+<span class="r-in"><span><span class="va">yfname</span> <span class="op">&lt;-</span> <span class="st">'y_e3_5e5.txt'</span> <span class="co"># response vector</span></span></span>
+<span class="r-in"><span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="setupX.html">setupX</a></span><span class="op">(</span><span class="va">xfname</span>, sep <span class="op">=</span> <span class="st">'\t'</span><span class="op">)</span> <span class="co"># create backing files (.bin, .desc)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="co"># ~ 7 minutes; this is just one-time operation</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># the big.matrix then can be retrieved by its descriptor file (.desc) in any new R session. </span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">xdesc</span> <span class="op">&lt;-</span> <span class="st">'x_e3_5e5.desc'</span> </span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">attach.big.matrix</span><span class="op">(</span><span class="va">xdesc</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">yfname</span>, header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">time.fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="biglasso.html">biglasso</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">'gaussian'</span>, screen <span class="op">=</span> <span class="st">'Hybrid'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">time.fit</span><span class="op">)</span> <span class="co"># ~ 44 seconds for fitting a lasso model along the entire solution path</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># cross validation in parallel</span></span></span>
+<span class="r-in"><span><span class="va">seed</span> <span class="op">&lt;-</span> <span class="fl">1234</span></span></span>
+<span class="r-in"><span><span class="va">time.cvfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">cvfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="cv.biglasso.html">cv.biglasso</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">'gaussian'</span>, screen <span class="op">=</span> <span class="st">'Hybrid'</span>, </span></span>
+<span class="r-in"><span>                       seed <span class="op">=</span> <span class="va">seed</span>, ncores <span class="op">=</span> <span class="fl">4</span>, nfolds <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">time.cvfit</span><span class="op">)</span> <span class="co"># ~ 3 minutes for 10-fold cross validation</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cvfit</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cvfit</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -226,7 +226,7 @@ Advances in Neural Information Processing Systems</em>, pp. 1053-1061.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

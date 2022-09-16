@@ -18,7 +18,7 @@ of values for the regularization parameter lambda."><!-- mathjax --><script src=
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">biglasso</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -58,20 +58,20 @@ of values for the regularization parameter lambda.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cv.biglasso</span><span class="op">(</span>
-  <span class="va">X</span>,
-  <span class="va">y</span>,
-  row.idx <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>,
-  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gaussian"</span>, <span class="st">"binomial"</span>, <span class="st">"cox"</span>, <span class="st">"mgaussian"</span><span class="op">)</span>,
-  eval.metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"default"</span>, <span class="st">"MAPE"</span>, <span class="st">"auc"</span>, <span class="st">"class"</span><span class="op">)</span>,
-  ncores <span class="op">=</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span>,
-  <span class="va">...</span>,
-  nfolds <span class="op">=</span> <span class="fl">5</span>,
-  <span class="va">seed</span>,
-  <span class="va">cv.ind</span>,
-  trace <span class="op">=</span> <span class="cn">FALSE</span>,
-  grouped <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cv.biglasso</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  row.idx <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>,</span>
+<span>  family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gaussian"</span>, <span class="st">"binomial"</span>, <span class="st">"cox"</span>, <span class="st">"mgaussian"</span><span class="op">)</span>,</span>
+<span>  eval.metric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"default"</span>, <span class="st">"MAPE"</span>, <span class="st">"auc"</span>, <span class="st">"class"</span><span class="op">)</span>,</span>
+<span>  ncores <span class="op">=</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  nfolds <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  <span class="va">seed</span>,</span>
+<span>  <span class="va">cv.ind</span>,</span>
+<span>  trace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  grouped <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,15 +79,23 @@ of values for the regularization parameter lambda.</p>
     <dl><dt>X</dt>
 <dd><p>The design matrix, without an intercept, as in
 <code><a href="biglasso.html">biglasso</a></code>.</p></dd>
+
+
 <dt>y</dt>
 <dd><p>The response vector, as in <code>biglasso</code>.</p></dd>
+
+
 <dt>row.idx</dt>
 <dd><p>The integer vector of row indices of <code>X</code> that used for
 fitting the model. as in <code>biglasso</code>.</p></dd>
+
+
 <dt>family</dt>
 <dd><p>Either <code>"gaussian"</code>, <code>"binomial"</code>, <code>"cox"</code> or
 <code>"mgaussian"</code> depending on the response. <code>"cox"</code> and <code>"mgaussian"</code>
 are not supported yet.</p></dd>
+
+
 <dt>eval.metric</dt>
 <dd><p>The evaluation metric for the cross-validated error and
 for choosing optimal <code>lambda</code>. "default" for linear regression is MSE
@@ -96,6 +104,8 @@ for choosing optimal <code>lambda</code>. "default" for linear regression is MSE
 "auc", for binary classification, is the area under the receiver operating
 characteristic curve (ROC).
 "class", for binary classification, gives the misclassification error.</p></dd>
+
+
 <dt>ncores</dt>
 <dd><p>The number of cores to use for parallel execution of the
 cross-validation folds, run on a cluster created by the <code>parallel</code>
@@ -104,58 +114,78 @@ package. (This is also supplied to the <code>ncores</code> argument in
 the first call of <code><a href="biglasso.html">biglasso</a></code> that is  run on the entire data. The
 individual calls of <code><a href="biglasso.html">biglasso</a></code> for the CV folds are run without
 the <code>ncores</code> argument.)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments to <code>biglasso</code>.</p></dd>
+
+
 <dt>nfolds</dt>
 <dd><p>The number of cross-validation folds.  Default is 5.</p></dd>
+
+
 <dt>seed</dt>
 <dd><p>The seed of the random number generator in order to obtain
 reproducible results.</p></dd>
+
+
 <dt>cv.ind</dt>
 <dd><p>Which fold each observation belongs to.  By default the
 observations are randomly assigned by <code>cv.biglasso</code>.</p></dd>
+
+
 <dt>trace</dt>
 <dd><p>If set to TRUE, cv.biglasso will inform the user of its
 progress by announcing the beginning of each CV fold.  Default is FALSE.</p></dd>
+
+
 <dt>grouped</dt>
 <dd><p>Whether to calculate CV standard error (<code>cvse</code>) over
 CV folds (<code>TRUE</code>), or over all cross-validated predictions. Ignored
 when <code>eval.metric</code> is 'auc'.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object with S3 class <code>"cv.biglasso"</code> which inherits from
+    
+
+<p>An object with S3 class <code>"cv.biglasso"</code> which inherits from
 class <code>"cv.ncvreg"</code>.  The following variables are contained in the
-class (adopted from <code><a href="https://pbreheny.github.io/ncvreg/reference/cv-ncvreg.html" class="external-link">cv.ncvreg</a></code>).</p>
+class (adopted from <code><a href="https://rdrr.io/pkg/ncvreg/man/cv-ncvreg.html" class="external-link">cv.ncvreg</a></code>).</p>
 <dl><dt>cve</dt>
 <dd><p>The error
 for each value of <code>lambda</code>, averaged across the cross-validation
 folds.</p></dd>
-<dt>cvse</dt>
+ <dt>cvse</dt>
 <dd><p>The estimated standard error associated with each value
 of for <code>cve</code>.</p></dd>
-<dt>lambda</dt>
+ <dt>lambda</dt>
 <dd><p>The sequence of regularization parameter
 values along which the cross-validation error was calculated.</p></dd>
+
 <dt>fit</dt>
 <dd><p>The fitted <code>biglasso</code> object for the whole data.</p></dd>
+
 <dt>min</dt>
 <dd><p>The index of <code>lambda</code> corresponding to <code>lambda.min</code>.</p></dd>
+
 <dt>lambda.min</dt>
 <dd><p>The value of <code>lambda</code> with the minimum
 cross-validation error.</p></dd>
-<dt>lambda.1se</dt>
+ <dt>lambda.1se</dt>
 <dd><p>The largest value of <code>lambda</code>
 for which the cross-validation error is at most one standard error larger
 than the minimum cross-validation error.</p></dd>
-<dt>null.dev</dt>
+ <dt>null.dev</dt>
 <dd><p>The deviance for
 the intercept-only model.</p></dd>
-<dt>pe</dt>
+ <dt>pe</dt>
 <dd><p>If <code>family="binomial"</code>, the
 cross-validation prediction error for each value of <code>lambda</code>.</p></dd>
+
 <dt>cv.ind</dt>
 <dd><p>Same as above.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -163,7 +193,7 @@ cross-validation prediction error for each value of <code>lambda</code>.</p></dd
 out 1/<code>nfolds</code> of the data.  The cross-validation error is based on the
 residual sum of squares when <code>family="gaussian"</code> and the binomial
 deviance when <code>family="binomial"</code>.<br><br> The S3 class object
-<code>cv.biglasso</code> inherits class <code><a href="https://pbreheny.github.io/ncvreg/reference/cv-ncvreg.html" class="external-link">cv.ncvreg</a></code>.  So S3
+<code>cv.biglasso</code> inherits class <code><a href="https://rdrr.io/pkg/ncvreg/man/cv-ncvreg.html" class="external-link">cv.ncvreg</a></code>.  So S3
 functions such as <code>"summary", "plot"</code> can be directly applied to the
 <code>cv.biglasso</code> object.</p>
     </div>
@@ -180,20 +210,20 @@ functions such as <code>"summary", "plot"</code> can be directly applied to the
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## cv.biglasso</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">colon</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">colon</span><span class="op">$</span><span class="va">X</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">colon</span><span class="op">$</span><span class="va">y</span></span>
-<span class="r-in"><span class="va">X.bm</span> <span class="op">&lt;-</span> <span class="fu">as.big.matrix</span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## logistic regression</span></span>
-<span class="r-in"><span class="va">cvfit</span> <span class="op">&lt;-</span> <span class="fu">cv.biglasso</span><span class="op">(</span><span class="va">X.bm</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">'binomial'</span>, seed <span class="op">=</span> <span class="fl">1234</span>, ncores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cvfit</span>, type <span class="op">=</span> <span class="st">'all'</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cvfit</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## cv.biglasso</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">colon</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">colon</span><span class="op">$</span><span class="va">X</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">colon</span><span class="op">$</span><span class="va">y</span></span></span>
+<span class="r-in"><span><span class="va">X.bm</span> <span class="op">&lt;-</span> <span class="fu">as.big.matrix</span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## logistic regression</span></span></span>
+<span class="r-in"><span><span class="va">cvfit</span> <span class="op">&lt;-</span> <span class="fu">cv.biglasso</span><span class="op">(</span><span class="va">X.bm</span>, <span class="va">y</span>, family <span class="op">=</span> <span class="st">'binomial'</span>, seed <span class="op">=</span> <span class="fl">1234</span>, ncores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cvfit</span>, type <span class="op">=</span> <span class="st">'all'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cvfit</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -208,7 +238,7 @@ functions such as <code>"summary", "plot"</code> can be directly applied to the
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

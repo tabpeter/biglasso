@@ -19,7 +19,7 @@ oligonucleotide Hum6000 array."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">biglasso</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -83,21 +83,21 @@ probed by oligonucleotide arrays. <em>Proc. Natl. Acad. Sci. USA</em>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">colon</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">colon</span><span class="op">$</span><span class="va">X</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">colon</span><span class="op">$</span><span class="va">y</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">colon</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="va">colon</span><span class="op">$</span><span class="va">X</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">colon</span><span class="op">$</span><span class="va">y</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  num [1:62, 1:2000] 8589 9164 3826 6246 3230 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "dimnames")=List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ : chr [1:62] "t" "n" "t" "n" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ : chr [1:2000] "Hsa.3004" "Hsa.13491" "Hsa.13491.1" "Hsa.37254" ...</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]   62 2000</span>
-<span class="r-in"><span class="va">X.bm</span> <span class="op">&lt;-</span> <span class="fu">as.big.matrix</span><span class="op">(</span><span class="va">X</span>, backingfile <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="co"># convert to big.matrix object</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">X.bm</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">X.bm</span> <span class="op">&lt;-</span> <span class="fu">as.big.matrix</span><span class="op">(</span><span class="va">X</span>, backingfile <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="co"># convert to big.matrix object</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">X.bm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formal class 'big.matrix' [package "bigmemory"] with 1 slot</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ address:&lt;externalptr&gt; </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">X.bm</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">X.bm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]   62 2000</span>
 </code></pre></div>
     </div>
@@ -113,7 +113,7 @@ probed by oligonucleotide arrays. <em>Proc. Natl. Acad. Sci. USA</em>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

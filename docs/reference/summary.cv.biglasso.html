@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">biglasso</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -56,63 +56,74 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for cv.biglasso</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for summary.cv.biglasso</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">digits</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for cv.biglasso</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for summary.cv.biglasso</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">digits</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>A <code>cv.biglasso</code> object.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Further arguments passed to or from other methods.</p></dd>
+
+
 <dt>x</dt>
 <dd><p>A <code>"summary.cv.biglasso"</code> object.</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>Number of digits past the decimal point to print out.  Can be
 a vector specifying different display digits for each of the five
 non-integer printed values.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>summary.cv.biglasso</code> produces an object with S3 class
+    
+
+<p><code>summary.cv.biglasso</code> produces an object with S3 class
 <code>"summary.cv.biglasso"</code>.  The class has its own print method and contains
 the following list elements:</p>
 <dl><dt>penalty</dt>
 <dd><p>The penalty used by
 <code>biglasso</code>.</p></dd>
-<dt>model</dt>
+ <dt>model</dt>
 <dd><p>Either <code>"linear"</code> or <code>"logistic"</code>,
 depending on the <code>family</code> option in <code>biglasso</code>.</p></dd>
-<dt>n</dt>
+ <dt>n</dt>
 <dd><p>Number
 of observations</p></dd>
-<dt>p</dt>
+ <dt>p</dt>
 <dd><p>Number of regression coefficients (not including
 the intercept).</p></dd>
-<dt>min</dt>
+ <dt>min</dt>
 <dd><p>The index of <code>lambda</code> with the smallest
 cross-validation error.</p></dd>
-<dt>lambda</dt>
+ <dt>lambda</dt>
 <dd><p>The sequence of <code>lambda</code> values
 used by <code>cv.biglasso</code>.</p></dd>
-<dt>cve</dt>
+ <dt>cve</dt>
 <dd><p>Cross-validation error (deviance).</p></dd>
+
 <dt>r.squared</dt>
 <dd><p>Proportion of variance explained by the model, as estimated
 by cross-validation.</p></dd>
-<dt>snr</dt>
+ <dt>snr</dt>
 <dd><p>Signal to noise ratio, as estimated by
 cross-validation.</p></dd>
-<dt>sigma</dt>
+ <dt>sigma</dt>
 <dd><p>For linear regression models, the scale
 parameter estimate.</p></dd>
-<dt>pe</dt>
+ <dt>pe</dt>
 <dd><p>For logistic regression models, the
 prediction error (misclassification error).</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -127,7 +138,7 @@ prediction error (misclassification error).</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## See examples in "cv.biglasso" and "biglasso-package"</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## See examples in "cv.biglasso" and "biglasso-package"</span></span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -143,7 +154,7 @@ prediction error (misclassification error).</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

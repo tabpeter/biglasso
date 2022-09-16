@@ -18,7 +18,7 @@ mbiglasso object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">biglasso</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -58,24 +58,33 @@ mbiglasso object."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for mbiglasso</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="fl">1</span>, log.l <span class="op">=</span> <span class="cn">TRUE</span>, norm.beta <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for mbiglasso</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="fl">1</span>, log.l <span class="op">=</span> <span class="cn">TRUE</span>, norm.beta <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>Fitted <code>"mbiglasso"</code> model.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>Controls alpha-blending, helpful when the number of covariates
 is large.  Default is alpha=1.</p></dd>
+
+
 <dt>log.l</dt>
 <dd><p>Should horizontal axis be on the log scale?  Default is TRUE.</p></dd>
+
+
 <dt>norm.beta</dt>
 <dd><p>Should the vertical axis be the l2 norm of coefficients for each variable?
 Default is TRUE. If False, the vertical axis is the coefficients.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other graphical parameters to <code>plot</code></p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -89,9 +98,9 @@ Default is TRUE. If False, the vertical axis is the coefficients.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">## See examples in "biglasso"</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## See examples in "biglasso"</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -107,7 +116,7 @@ Default is TRUE. If False, the vertical axis is the coefficients.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

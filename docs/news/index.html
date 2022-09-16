@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">biglasso</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -51,14 +51,16 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.5.1" id="biglasso-151">biglasso 1.5.1<a class="anchor" aria-label="anchor" href="#biglasso-151"></a></h2>
+<h2 class="page-header" data-toc-text="1.5.2" id="biglasso-152">biglasso 1.5.2<a class="anchor" aria-label="anchor" href="#biglasso-152"></a></h2>
+<ul><li>Update coercion for compatibility with Matrix 1.5</li></ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.1" id="biglasso-151">biglasso 1.5.1<small>2022-03-09</small><a class="anchor" aria-label="anchor" href="#biglasso-151"></a></h2>
 <ul><li>Internal Cpp changes: initialize Xty, remove unused cutoff variable (<a href="https://github.com/YaohuiZeng/biglasso/issues/48" class="external-link">#48</a>)</li>
 <li>Eliminate CV test against ncvreg (the two packages no longer use the same approach (<a href="https://github.com/YaohuiZeng/biglasso/issues/47" class="external-link">#47</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="biglasso-150">biglasso 1.5.0<small>2022-02-08</small><a class="anchor" aria-label="anchor" href="#biglasso-150"></a></h2>
-<ul><li>Update headers to maintain compatibility with new version of Rcpp (<a href="https://github.com/YaohuiZeng/biglasso/issues/40" class="external-link">#40</a>)</li>
-</ul></div>
+<ul><li>Update headers to maintain compatibility with new version of Rcpp (<a href="https://github.com/YaohuiZeng/biglasso/issues/40" class="external-link">#40</a>)</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4-1" id="biglasso-14-1">biglasso 1.4-1<a class="anchor" aria-label="anchor" href="#biglasso-14-1"></a></h2>
 <ul><li>changed R package maintainer to Chuyi Wang (<a href="mailto:wwaa0208@gmail.com" class="email">wwaa0208@gmail.com</a>)</li>
@@ -95,8 +97,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3-4" id="biglasso-13-4">biglasso 1.3-4<a class="anchor" aria-label="anchor" href="#biglasso-13-4"></a></h2>
-<ul><li>fixed a bug related to <code>dfmax</code> option. (thanks you Florian Privé!)</li>
-</ul></div>
+<ul><li>fixed a bug related to <code>dfmax</code> option. (thanks you Florian Privé!)</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3-3" id="biglasso-13-3">biglasso 1.3-3<small>2017-01-26</small><a class="anchor" aria-label="anchor" href="#biglasso-13-3"></a></h2>
 <ul><li>fixed bugs related to KKT checking for elastic net. (thanks you Florian Privé!)</li>
@@ -109,12 +110,10 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3-1" id="biglasso-13-1">biglasso 1.3-1<small>2016-12-31</small><a class="anchor" aria-label="anchor" href="#biglasso-13-1"></a></h2>
-<ul><li>fixed bug in SSR-Slores related to numeric equality comparison.</li>
-</ul></div>
+<ul><li>fixed bug in SSR-Slores related to numeric equality comparison.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3-0" id="biglasso-13-0">biglasso 1.3-0<small>2016-12-21</small><a class="anchor" aria-label="anchor" href="#biglasso-13-0"></a></h2>
-<ul><li>version 1.3-0 for CRAN submission.</li>
-</ul></div>
+<ul><li>version 1.3-0 for CRAN submission.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2-6" id="biglasso-12-6">biglasso 1.2-6<a class="anchor" aria-label="anchor" href="#biglasso-12-6"></a></h2>
 <ul><li>added a newly proposed screening rule, SSR-Slores, for lasso-penalized logistic regression.</li>
@@ -138,8 +137,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2-2" id="biglasso-12-2">biglasso 1.2-2<a class="anchor" aria-label="anchor" href="#biglasso-12-2"></a></h2>
-<ul><li>added internal data set: the colon cancer data.</li>
-</ul></div>
+<ul><li>added internal data set: the colon cancer data.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2-1" id="biglasso-12-1">biglasso 1.2-1<a class="anchor" aria-label="anchor" href="#biglasso-12-1"></a></h2>
 <ul><li>Implemented another new screening rule (SSR-BEDPP), also combining hybrid strong rule with a safe rule (BEDPP).</li>
@@ -148,8 +146,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1-2" id="biglasso-11-2">biglasso 1.1-2<a class="anchor" aria-label="anchor" href="#biglasso-11-2"></a></h2>
-<ul><li>fixed bugs occurred when some features have identical values for different observations. These features are internally removed from model fitting.</li>
-</ul></div>
+<ul><li>fixed bugs occurred when some features have identical values for different observations. These features are internally removed from model fitting.</li></ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1-1" id="biglasso-11-1">biglasso 1.1-1<a class="anchor" aria-label="anchor" href="#biglasso-11-1"></a></h2>
 <ul><li>Three sparse screening rules (SSR, EDPP, SSR-Dome) were implemented. Our new proposed HSR-Dome combines HSR and Dome test for feature screening, leading to even better performance as compared to ‘glmnet’.</li>
@@ -160,8 +157,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0-1" id="biglasso-10-1">biglasso 1.0-1<small>2016-03-02</small><a class="anchor" aria-label="anchor" href="#biglasso-10-1"></a></h2>
-<ul><li>package ready for CRAN submission.</li>
-</ul></div>
+<ul><li>package ready for CRAN submission.</li></ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -176,7 +172,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ along with standard error bars."><!-- mathjax --><script src="https://cdnjs.clou
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">biglasso</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -58,24 +58,28 @@ along with standard error bars.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for cv.biglasso</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">x</span>,
-  log.l <span class="op">=</span> <span class="cn">TRUE</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cve"</span>, <span class="st">"rsq"</span>, <span class="st">"scale"</span>, <span class="st">"snr"</span>, <span class="st">"pred"</span>, <span class="st">"all"</span><span class="op">)</span>,
-  selected <span class="op">=</span> <span class="cn">TRUE</span>,
-  vertical.line <span class="op">=</span> <span class="cn">TRUE</span>,
-  col <span class="op">=</span> <span class="st">"red"</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for cv.biglasso</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  log.l <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cve"</span>, <span class="st">"rsq"</span>, <span class="st">"scale"</span>, <span class="st">"snr"</span>, <span class="st">"pred"</span>, <span class="st">"all"</span><span class="op">)</span>,</span>
+<span>  selected <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  vertical.line <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>A <code>"cv.biglasso"</code> object.</p></dd>
+
+
 <dt>log.l</dt>
 <dd><p>Should horizontal axis be on the log scale?  Default is TRUE.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>What to plot on the vertical axis.  <code>cve</code> plots the
 cross-validation error (deviance); <code>rsq</code> plots an estimate of the
@@ -84,17 +88,26 @@ plots an estimate of the signal-to-noise ratio; <code>scale</code> plots, for
 <code>family="gaussian"</code>, an estimate of the scale parameter (standard
 deviation); <code>pred</code> plots, for <code>family="binomial"</code>, the estimated
 prediction error; <code>all</code> produces all of the above.</p></dd>
+
+
 <dt>selected</dt>
 <dd><p>If <code>TRUE</code> (the default), places an axis on top of the
 plot denoting the number of variables in the model (i.e., that have a
 nonzero regression coefficient) at that value of <code>lambda</code>.</p></dd>
+
+
 <dt>vertical.line</dt>
 <dd><p>If <code>TRUE</code> (the default), draws a vertical line at
 the value where cross-validaton error is minimized.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>Controls the color of the dots (CV estimates).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other graphical parameters to <code>plot</code></p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -114,9 +127,9 @@ along with the estimates at value of <code>lambda</code>.  For <code>rsq</code> 
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">## See examples in "cv.biglasso"</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## See examples in "cv.biglasso"</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -132,7 +145,7 @@ along with the estimates at value of <code>lambda</code>.  For <code>rsq</code> 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
