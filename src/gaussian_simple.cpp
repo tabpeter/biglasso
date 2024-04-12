@@ -151,10 +151,10 @@ RcppExport SEXP cdfit_gaussian_simple(SEXP X_,
         // update beta
         l1 = lambda * m[j] * alpha;
         l2 = lambda * m[j] * (1-alpha);
-        // TODO: add SCAD and MCP to the below
      //   Rprintf("\nCalling lasso");
-        b[j] = lasso(z[j], l1, l2, xtx[j]);
-        
+     if (strcmp(penalty,"MCP")==0) b[j] = MCP(z[j], l1, l2, gamma, xtx[j]);
+     if (strcmp(penalty,"SCAD")==0) b[j] = SCAD(z[j], l1, l2, gamma, xtx[j]);
+     if (strcmp(penalty,"lasso")==0) b[j] = lasso(z[j], l1, l2, xtx[j]);
         
         // if something enters, update active set and residuals
         if (b[j] != 0) {
@@ -241,7 +241,7 @@ RcppExport SEXP cdfit_gaussian_simple_path(SEXP X_,
   IntegerVector iter(L);
   double l1, l2, shift, cp;
   double max_update, update, thresh; // for convergence check
-  int i, j, jj, l, lstart; //temp indices
+  int i, j, l, lstart; //temp indices
   int *ever_active = R_Calloc(p, int); // ever-active set
   lstart = 0;
   lambda = Rcpp::as<NumericVector>(lambda_);

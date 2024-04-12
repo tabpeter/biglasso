@@ -1,5 +1,5 @@
 devtools::load_all('.')
-
+library(ncvreg)
 # colon data ----------------------------------------------------------------
 data(colon)
 X <- colon$X |> ncvreg::std()
@@ -11,17 +11,31 @@ resid <- drop(y - X %*% init)
 X.bm <- as.big.matrix(X)
 
 ## lasso ---------------------------------------------------------------------
-fit1 <- biglasso_fit(X.bm, y, lambda = 0.05, xtx=xtx, r = resid, max.iter = 10000)
+fit1 <- biglasso_fit(X.bm, y, lambda = 0.05, xtx = xtx, r = resid,
+                     penalty = "lasso", max.iter = 10000)
 
 # compare with `ncvreg::ncvfit()`
-library(ncvreg)
-fit2 <- ncvfit(X = X, y = y, lambda = 0.05, xtx = xtx, r = resid, penalty = "lasso")
+fit2 <- ncvfit(X = X, y = y, lambda = 0.05, xtx = xtx, r = resid,
+               penalty = "lasso", max.iter = 10000)
 
 # test coefficients 
 tinytest::expect_equal(fit1$beta, fit2$beta, tolerance = 0.01)
 
 # test residuals
 tinytest::expect_equal(fit1$resid, fit2$resid, tolerance = 0.01)
+
+if (interactive()){
+  nz1 <- which(fit1$beta != 0)
+  fit1$beta[nz1]
+  
+  nz2 <- which(fit2$beta != 0)
+  fit1$beta[nz2]
+  
+  if (identical(names(fit1$beta), names(fit2$beta))) {
+    names(fit1$beta[intersect(nz1, nz2)])
+  }
+
+}
 
 ## MCP --------------------------------------------------------------
 fit1b <- biglasso_fit(X.bm, y, lambda = 0.05,
@@ -31,6 +45,7 @@ fit1b <- biglasso_fit(X.bm, y, lambda = 0.05,
 fit2b <- ncvfit(X = X, y = y, lambda = 0.05, xtx = xtx, r = resid,
                 penalty = "MCP")
 
+tinytest::expect_equal(fit1b$beta, fit2b$beta, tolerance = 0.01)
 tinytest::expect_equal(fit1b$resid, fit2b$resid, tolerance = 0.01)
 
 
@@ -83,6 +98,7 @@ fit3b <- biglasso_fit(X = X.bm, y = y, xtx = xtx, r = resid, lambda = 0.1,
 fit4b <- ncvfit(X = X, y = y, init = init, r = resid, xtx = xtx,
                penalty = "MCP", lambda = 0.1)
 
+tinytest::expect_equivalent(fit3b$beta, fit4b$beta, tolerance = 0.01)
 tinytest::expect_equivalent(fit3b$resid, fit4b$resid, tolerance = 0.01)
 
 ## SCAD --------------------------------------------------------------------

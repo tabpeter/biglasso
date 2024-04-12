@@ -110,7 +110,13 @@ biglasso_fit <- function(X,
                          return.time = TRUE) {
 
   # set default gamma (will need this for cv.plmm)
-  if (missing(gamma)) gamma <- switch(penalty, SCAD = 3.7, 3)
+  if (missing(gamma)) {
+    gamma <- switch(penalty,
+                    SCAD = 3.7,
+                    MCP = 3,
+                    lasso = 0)
+    # NB: the gamma=0 is a dummy value for lasso; the lasso penalty does not use a gamma parameter
+  }
   
   # check types
   if (!("big.matrix" %in% class(X)) || typeof(X) != "double") stop("X must be a double type big.matrix.")
